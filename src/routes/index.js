@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom"
 import UserProfile from "../pages/Authentication/UserProfile"
 
 // Authentication related pages
-import Login from "../pages/Authentication/Login"
+import LoginPage from "../pages/Authentication/LoginPage"
 import Logout from "../pages/Authentication/Logout"
 import Register from "../pages/Authentication/Register"
 import ForgetPwd from "../pages/Authentication/ForgetPassword"
@@ -25,7 +25,7 @@ const authProtectedRoutes = [
 
 const publicRoutes = [
   { path: "/logout", component: Logout },
-  { path: "/login", component: Login },
+  { path: "/login", component: LoginPage },
   { path: "/forgot-password", component: ForgetPwd },
   { path: "/register", component: Register }
 ]
