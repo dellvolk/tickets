@@ -20,32 +20,63 @@ beforeAll(() => {
 const renderComponent = () => render(<App />);
 
 
-fakeBackend()
+fakeBackend();
+
+// jest.mock("axios")
 
 describe("axios mocking test", () => {
 
-  it("axios request login should be success", () =>  axios.post("/post-fake-login", {
-      email: "admin@themesbrand.com",
-      password: "123456",
-    }).then(res => {
-      expect(JSON.stringify(res.data)).toBe(JSON.stringify({
-        uid: 1,
-        username: "admin",
-        role: "admin",
-        password: "123456",
-        email: "admin@themesbrand.com",
-      }))
-    }));
+  let res
+  let data
+  let error
+  let success_login_data
+  let fail_login_data
 
-  it("axios request login should be unsuccessful", () =>  axios.post("/post-fake-login", {
-    email: "admin@themesbrand.com",
-    password: "1234567",
+  beforeEach(() => {
+
+    success_login_data = {
+      email: "admin@themesbrand.com",
+      password: "123456"
+    }
+
+    fail_login_data = {
+      email: "admin@themesbrand.com",
+      password: "error"
+    }
+
+    data = {
+      uid: 1,
+      username: "admin",
+      role: "admin",
+      password: "123456",
+      email: "admin@themesbrand.com"
+    }
+
+    res = {
+      data
+    }
+    error = [
+      "Username and password are invalid. Please enter correct username and password"
+    ]
   })
-    .catch(e => {
-      expect(JSON.stringify(e)).toBe(JSON.stringify([
-        "Username and password are invalid. Please enter correct username and password",
-      ]))
-    })
+
+  // it("axios request login should be called", () => {
+  //   axios.get.mockReturnValue(res)
+  //
+  //   return axios.post("/post-fake-login", success_login_data)
+  //     .then(response => {
+  //       expect(response.data).toEqual(data)
+  //     })
+  // });
+
+  it("request login should be success", () => axios.post("/post-fake-login", success_login_data).then(res => {
+    expect(JSON.stringify(res.data)).toBe(JSON.stringify(data));
+  }));
+
+  it("request login should be unsuccessful", () => axios.post("/post-fake-login", fail_login_data)
+      .catch(e => {
+        expect(JSON.stringify(e)).toBe(JSON.stringify(error));
+      })
   );
 });
 
