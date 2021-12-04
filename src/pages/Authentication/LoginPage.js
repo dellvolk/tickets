@@ -242,10 +242,10 @@ class LoginPage extends Component {
                       Signup Now
                     </Link>
                   </p>
-                  <p>
-                    © {new Date().getFullYear()} Tickets. Crafted with
-                    <i className="mdi mdi-heart text-danger" /> by Radchenko Andriy
-                  </p>
+                  {/*<p>*/}
+                  {/*  © {new Date().getFullYear()} Tickets. Crafted with*/}
+                  {/*  <i className="mdi mdi-heart text-danger" /> by Radchenko Andriy*/}
+                  {/*</p>*/}
                 </div>
               </Col>
             </Row>

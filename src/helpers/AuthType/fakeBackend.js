@@ -54,12 +54,12 @@ let users = [
 
 export default class Backend {
   constructor() {
-    if (Backend.exists) {
-      return Backend.instance;
-    }
+    if (Backend.exists) return Backend.instance;
     Backend.exists = true
     Backend.instance = this
+
     fakeBackend()
+    console.log("Backend loaded!");
   }
 }
 
