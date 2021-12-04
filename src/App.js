@@ -18,11 +18,11 @@ import "./assets/scss/theme.scss"
 // Import Firebase Configuration file
 // import { initFirebaseBackend } from "./helpers/firebase_helper"
 
-// Import fackbackend Configuration file
-import fakeBackend from "./helpers/AuthType/fakeBackend"
+// Import Backend Configuration file
+import Backend from "./helpers/AuthType/fakeBackend"
 
 // Activating fake backend
-fakeBackend()
+new Backend()
 
 // Activating fake firebase
 // const firebaseConfig = {

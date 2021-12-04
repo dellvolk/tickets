@@ -3,7 +3,7 @@ import { cleanup, render } from "@testing-library/react";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import App from "./App";
-import fakeBackend from "./helpers/AuthType/fakeBackend";
+import { fakeBackend } from "./helpers/AuthType/fakeBackend";
 
 // test("renders learn react link", () => {
 //   const { getByText } = render(<App />)
@@ -74,9 +74,9 @@ describe("axios mocking test", () => {
   }));
 
   it("request login should be unsuccessful", () => axios.post("/post-fake-login", fail_login_data)
-      .catch(e => {
-        expect(JSON.stringify(e)).toBe(JSON.stringify(error));
-      })
+    .catch(e => {
+      expect(JSON.stringify(e)).toBe(JSON.stringify(error));
+    })
   );
 });
 

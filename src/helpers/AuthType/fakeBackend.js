@@ -52,7 +52,18 @@ let users = [
   },
 ]
 
-const fakeBackend = () => {
+export default class Backend {
+  constructor() {
+    if (Backend.exists) {
+      return Backend.instance;
+    }
+    Backend.exists = true
+    Backend.instance = this
+    fakeBackend()
+  }
+}
+
+export const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios)
 
@@ -932,5 +943,3 @@ const fakeBackend = () => {
     });
   });
 }
-
-export default fakeBackend
