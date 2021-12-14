@@ -30,6 +30,16 @@ import product6c from "../../assets/images/product/Pro-17a.png";
 
 const productsData = [
   {
+    id: 192,
+    title: "БИ-2",
+    image: 'https://storage.concert.ua/JmJ/2/mQ/61a8778ebe867/e8ae.jpg:31-catalog-event_item-desktop',
+    description: "Би-2 скучили за Україною й мають чим порадувати шанувальників: вони привезуть своє нове шоу NewBest, наймасштабніше і найбільш видовищне в історії гурту. На гостей концерту чекають захоплююча сценографія й світлове шоу, а окрему увагу гурт традиційно приділить топовому, потужному звуку.",
+    price: 300,
+    category: 1,
+    date: new Date().toDateString(),
+    address: "Київ, пр-т Ак. Глушкова, 1",
+  },
+  {
     id: 1,
     image: "product1",
     name: "Half sleeve T-shirt",

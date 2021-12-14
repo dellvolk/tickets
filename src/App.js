@@ -1,28 +1,26 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BrowserRouter as Router, Switch } from "react-router-dom"
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 // Import Routes
-import { authProtectedRoutes, publicRoutes } from "./routes/"
-import AppRoute from "./routes/route"
+import { authProtectedRoutes, publicRoutes } from "./routes/";
+import AppRoute from "./routes/route";
 
 // layouts
-import VerticalLayout from "./components/VerticalLayout/"
-import HorizontalLayout from "./components/HorizontalLayout/"
-import NonAuthLayout from "./components/NonAuthLayout"
+import HorizontalLayout from "./components/HorizontalLayout/";
+import NonAuthLayout from "./components/NonAuthLayout";
 
 // Import scss
-import "./assets/scss/theme.scss"
+import "./assets/scss/theme.scss";
 
 // Import Firebase Configuration file
 // import { initFirebaseBackend } from "./helpers/firebase_helper"
-
 // Import Backend Configuration file
-import Backend from "./helpers/AuthType/fakeBackend"
+// import Backend from "./helpers/AuthType/fakeBackend";
 
 // Activating fake backend
-new Backend()
+// new Backend()
 
 // Activating fake firebase
 // const firebaseConfig = {
@@ -43,28 +41,10 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.getLayout = this.getLayout.bind(this)
-  }
-
-  /**
-   * Returns the layout
-   */
-  getLayout = () => {
-    let layoutCls = VerticalLayout
-
-    switch (this.props.layout.layoutType) {
-      case "horizontal":
-        layoutCls = HorizontalLayout
-        break
-      default:
-        layoutCls = VerticalLayout
-        break
-    }
-    return layoutCls
   }
 
   render() {
-    const Layout = this.getLayout()
+    const Layout = HorizontalLayout
 
     return (
       <React.Fragment>

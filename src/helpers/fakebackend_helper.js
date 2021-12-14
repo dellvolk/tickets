@@ -101,7 +101,7 @@ export const getProducts = () => get(url.GET_PRODUCTS)
 
 // get Product detail
 export const getProductDetail = id =>
-  get(`${url.GET_PRODUCTS_DETAIL}/${id}`, { params: { id } })
+  get(`${url.GET_PRODUCTS_DETAIL}/${id}`)
 
 // get Events
 export const getEvents = () => get(url.GET_EVENTS)

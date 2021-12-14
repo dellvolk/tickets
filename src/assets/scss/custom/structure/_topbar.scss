@@ -284,7 +284,7 @@ body[data-layout="horizontal"] {
     width: auto;
   }
   .page-content {
-    margin-top: $header-height;
+    margin-top: 30px;
     padding: calc(55px + #{$grid-gutter-width}) calc(#{$grid-gutter-width} / 2)
       $footer-height calc(#{$grid-gutter-width} / 2);
   }

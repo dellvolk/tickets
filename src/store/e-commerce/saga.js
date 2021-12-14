@@ -1,62 +1,63 @@
-import { call, put, takeEvery } from "redux-saga/effects"
+import { call, put, takeEvery } from "redux-saga/effects";
 
 // Ecommerce Redux States
 import {
+  ADD_NEW_CUSTOMER,
+  ADD_NEW_ORDER,
+  DELETE_CUSTOMER,
+  DELETE_ORDER,
   GET_CART_DATA,
   GET_CUSTOMERS,
   GET_ORDERS,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS,
   GET_SHOPS,
-  ADD_NEW_ORDER,
-  DELETE_ORDER,
-  UPDATE_ORDER,
-  ADD_NEW_CUSTOMER,
-  DELETE_CUSTOMER,
-  UPDATE_CUSTOMER
-} from "./actionTypes"
+  UPDATE_CUSTOMER,
+  UPDATE_ORDER
+} from "./actionTypes";
 import {
+  addCustomerFail,
+  addCustomerSuccess,
+  addOrderFail,
+  addOrderSuccess,
+  deleteCustomerFail,
+  deleteCustomerSuccess,
+  deleteOrderFail,
+  deleteOrderSuccess,
   getCartDataFail,
   getCartDataSuccess,
   getCustomersFail,
   getCustomersSuccess,
   getOrdersFail,
   getOrdersSuccess,
-  addOrderFail,
-  addOrderSuccess,
-  updateOrderSuccess,
-  updateOrderFail,
-  deleteOrderSuccess,
-  deleteOrderFail,
   getProductDetailFail,
   getProductDetailSuccess,
   getProductsFail,
   getProductsSuccess,
   getShopsFail,
   getShopsSuccess,
-  addCustomerFail,
-  addCustomerSuccess,
-  updateCustomerSuccess,
   updateCustomerFail,
-  deleteCustomerSuccess,
-  deleteCustomerFail,
-} from "./actions"
+  updateCustomerSuccess,
+  updateOrderFail,
+  updateOrderSuccess
+} from "./actions";
 
 //Include Both Helper File with needed methods
 import {
+  addNewCustomer,
+  addNewOrder,
+  deleteCustomer,
+  deleteOrder,
   getCartData,
   getCustomers,
   getOrders,
-  addNewOrder,
-  updateOrder,
-  deleteOrder,
+  getProductDetail,
   getProducts,
   getShops,
-  getProductDetail,
-  addNewCustomer,
   updateCustomer,
-  deleteCustomer
-} from "helpers/fakebackend_helper"
+  updateOrder
+} from "helpers/fakebackend_helper";
+import { axiosApi } from "../../helpers/api_helper";
 
 function* fetchProducts() {
   try {
