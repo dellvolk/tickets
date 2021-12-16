@@ -1,5 +1,5 @@
 import axios from "axios"
-import { del, get, post, put } from "./api_helper"
+import { axiosApi, del, get, post, put } from "./api_helper";
 import * as url from "./url_helper"
 
 // Gets the logged in user data from local session
@@ -58,7 +58,7 @@ const postFakeProfile = data => post(url.POST_EDIT_PROFILE, data)
 
 // Register Method
 const postJwtRegister = (url, data) => {
-  return axios
+  return axiosApi
     .post(url, data)
     .then(response => {
       if (response.status >= 200 || response.status <= 299) return response.data
@@ -74,6 +74,10 @@ const postJwtRegister = (url, data) => {
           case 500:
             message =
               "Sorry! something went wrong, please contact our support team"
+            break
+          case 400:
+            message =
+              "This email is in use"
             break
           case 401:
             message = "Invalid credentials"

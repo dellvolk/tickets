@@ -55,6 +55,15 @@ const cartData = [
   }
 ];
 
+const dateFormatter = new Intl.DateTimeFormat("ua", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+});
+
 /*
 
 orderSummary: {
@@ -72,6 +81,26 @@ const productsData = [
     id: 192,
     title: "БИ-2",
     image: "https://storage.concert.ua/JmJ/2/mQ/61a8778ebe867/e8ae.jpg:31-catalog-event_item-desktop",
+    description: "Би-2 скучили за Україною й мають чим порадувати шанувальників: вони привезуть своє нове шоу NewBest, наймасштабніше і найбільш видовищне в історії гурту. На гостей концерту чекають захоплююча сценографія й світлове шоу, а окрему увагу гурт традиційно приділить топовому, потужному звуку.",
+    price: 300,
+    category: 1,
+    date: new Date().toDateString(),
+    address: "Київ, пр-т Ак. Глушкова, 1"
+  },
+  {
+    id: 193,
+    title: "БАСТА",
+    image: "https://storage.concert.ua/JmF/2/Wy/61307f755772a/7779.jpg:31-catalog-event_item-desktop ",
+    description: "Би-2 скучили за Україною й мають чим порадувати шанувальників: вони привезуть своє нове шоу NewBest, наймасштабніше і найбільш видовищне в історії гурту. На гостей концерту чекають захоплююча сценографія й світлове шоу, а окрему увагу гурт традиційно приділить топовому, потужному звуку.",
+    price: 300,
+    category: 1,
+    date: new Date().toDateString(),
+    address: "Київ, пр-т Ак. Глушкова, 1"
+  },
+  {
+    id: 194,
+    title: "MARKUL",
+    image: "https://storage.concert.ua/JmF/3/4I/61322b832f1b7/f203.png:31-catalog-event_item-desktop",
     description: "Би-2 скучили за Україною й мають чим порадувати шанувальників: вони привезуть своє нове шоу NewBest, наймасштабніше і найбільш видовищне в історії гурту. На гостей концерту чекають захоплююча сценографія й світлове шоу, а окрему увагу гурт традиційно приділить топовому, потужному звуку.",
     price: 300,
     category: 1,
@@ -303,5 +332,6 @@ const productsData = [
 
 module.exports = {
   cartData,
-  productsData
+  productsData,
+  dateFormatter,
 };

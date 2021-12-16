@@ -11,42 +11,29 @@ import {
   postJwtLogin,
   postSocialLogin,
 } from "../../../helpers/fakebackend_helper"
+import { axiosApi } from "../../../helpers/api_helper";
 
 const fireBaseBackend = getFirebaseBackend()
 
 function* loginUser({ payload: { user, history } }) {
   try {
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      const response = yield call(
-        fireBaseBackend.loginUser,
-        user.email,
-        user.password
-      )
-      yield put(loginSuccess(response))
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-      const response = yield call(postJwtLogin, {
-        email: user.email,
-        password: user.password,
-      })
-      localStorage.setItem("authUser", JSON.stringify(response))
-      yield put(loginSuccess(response))
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
-      const response = yield call(postFakeLogin, {
-        email: user.email,
-        password: user.password,
-      })
-      localStorage.setItem("authUser", JSON.stringify(response))
-      yield put(loginSuccess(response))
-    }
+    const response = yield call(postJwtLogin, {
+      email: user.email,
+      password: user.password,
+    })
+    localStorage.setItem("authUser", JSON.stringify(response))
+    axiosApi.defaults.headers.common["Authorization"] = `Token ${response.id}`
+    yield put(loginSuccess(response))
     history.push("/dashboard")
   } catch (error) {
-    yield put(apiError(error))
+    yield put(apiError(error.response.data))
   }
 }
 
 function* logoutUser({ payload: { history } }) {
   try {
     localStorage.removeItem("authUser")
+    axiosApi.defaults.headers.common["Authorization"] = ""
 
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
       const response = yield call(fireBaseBackend.logout)

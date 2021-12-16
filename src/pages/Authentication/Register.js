@@ -103,16 +103,6 @@ class Register extends Component {
                             required
                           />
                         </div>
-
-                        <div className="mb-3">
-                          <AvField
-                            name="username"
-                            label="Username"
-                            type="text"
-                            required
-                            placeholder="Enter username"
-                          />
-                        </div>
                         <div className="mb-3">
                           <AvField
                             name="password"
@@ -120,6 +110,16 @@ class Register extends Component {
                             type="password"
                             required
                             placeholder="Enter Password"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <AvField
+                            name="confirm"
+                            label="Confirm password"
+                            type="password"
+                            required
+                            validate={{match:{value:'password'}}}
+                            placeholder="Confirm password"
                           />
                         </div>
 
