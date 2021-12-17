@@ -35,10 +35,20 @@ import {
   DELETE_CUSTOMER,
   DELETE_CUSTOMER_SUCCESS,
   DELETE_CUSTOMER_FAIL,
-} from "./actionTypes"
+  ADD_PRODUCT_TO_CART,
+  DELETE_CART_BY_ID,
+  GET_ARCHIVE_DATA,
+  GET_ARCHIVE_DATA_SUCCESS,
+  POST_BUY_TICKETS, SET_PRODUCT_FILTERS
+} from "./actionTypes";
 
 export const getProducts = () => ({
   type: GET_PRODUCTS,
+})
+
+export const setProductFilters = payload => ({
+  type: SET_PRODUCT_FILTERS,
+  payload
 })
 
 export const getProductsSuccess = products => ({
@@ -49,6 +59,16 @@ export const getProductsSuccess = products => ({
 export const getProductsFail = error => ({
   type: GET_PRODUCTS_FAIL,
   payload: error,
+})
+
+export const addProductToCart = (id, history) => ({
+  type:ADD_PRODUCT_TO_CART,
+  payload: { id, history }
+})
+
+export const deleteProductFromCart = id => ({
+  type:ADD_PRODUCT_TO_CART,
+  payload: id
 })
 
 export const getProductDetail = productId => ({
@@ -125,12 +145,31 @@ export const deleteOrderFail = error => ({
   payload: error,
 })
 
+export const fetchBuyTickets = (data, history) => ({
+  type: POST_BUY_TICKETS,
+  payload: { data, history }
+})
+
 export const getCartData = () => ({
   type: GET_CART_DATA,
 })
 
+export const deleteCartById = id => ({
+  type: DELETE_CART_BY_ID,
+  payload: { id }
+})
+
 export const getCartDataSuccess = cartData => ({
   type: GET_CART_DATA_SUCCESS,
+  payload: cartData,
+})
+
+export const getArchiveData = () => ({
+  type: GET_ARCHIVE_DATA,
+})
+
+export const getArchiveDataSuccess = cartData => ({
+  type: GET_ARCHIVE_DATA_SUCCESS,
   payload: cartData,
 })
 

@@ -23,6 +23,7 @@ import Breadcrumb from "../../components/Common/Breadcrumb";
 import avatar from "../../assets/images/users/avatar-1.jpg";
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions";
+import EcommerceArchive from "../Ecommerce/EcommerceArchive";
 
 class UserProfile extends Component {
   constructor(props) {
@@ -60,18 +61,8 @@ class UserProfile extends Component {
   componentDidUpdate(prevProps, prevState, ss) {
     if (this.props !== prevProps) {
       const obj = JSON.parse(localStorage.getItem("authUser"))
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        this.setState({
-          name: obj.displayName,
-          email: obj.email,
-          idx: obj.uid,
-        })
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        this.setState({ name: obj.username, email: obj.email, idx: obj.uid })
-      }
+      this.setState({ name: obj.username, email: obj.email, idx: obj.uid })
+
       setTimeout(() => {
         this.props.resetProfileFlag();
       }, 3000);
@@ -84,7 +75,7 @@ class UserProfile extends Component {
         <div className="page-content">
           <Container fluid>
             {/* Render Breadcrumb */}
-            <Breadcrumb title="Skote" breadcrumbItem="Profile" />
+            <Breadcrumb title="" breadcrumbItem="Профіль" />
 
             <Row>
               <Col lg="12">
@@ -109,7 +100,6 @@ class UserProfile extends Component {
                         <div className="text-muted">
                           <h5>{this.state.name}</h5>
                           <p className="mb-1">{this.state.email}</p>
-                          <p className="mb-0">Id no: #{this.state.idx}</p>
                         </div>
                       </div>
                     </div>
@@ -118,36 +108,49 @@ class UserProfile extends Component {
               </Col>
             </Row>
 
-            <h4 className="card-title mb-4">Change User Name</h4>
+            {/*<h4 className="card-title mb-4">Зміна пароля</h4>*/}
+            {/*<Card>*/}
+            {/*  <CardBody>*/}
+            {/*    <AvForm*/}
+            {/*      className="form-horizontal"*/}
+            {/*      onValidSubmit={(e, v) => {*/}
+            {/*        this.handleValidSubmit(e, v)*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      <Row className="form-group">*/}
+            {/*        <Col>*/}
+            {/*            <AvField*/}
+            {/*              name="password"*/}
+            {/*              label="Password"*/}
+            {/*              className="form-control"*/}
+            {/*              type="password"*/}
+            {/*              required*/}
+            {/*              placeholder="Enter Password"*/}
+            {/*            />*/}
+            {/*        </Col>*/}
+            {/*        <Col>*/}
+            {/*            <AvField*/}
+            {/*              name="confirm"*/}
+            {/*              label="Confirm password"*/}
+            {/*              className="form-control"*/}
+            {/*              type="password"*/}
+            {/*              required*/}
+            {/*              validate={{match:{value:'password'}}}*/}
+            {/*              placeholder="Confirm password"*/}
+            {/*            />*/}
+            {/*        </Col>*/}
+            {/*      </Row>*/}
+            {/*      <div className="text-center mt-4">*/}
+            {/*        <Button type="submit" color="danger">*/}
+            {/*          Зберегти*/}
+            {/*        </Button>*/}
+            {/*      </div>*/}
+            {/*    </AvForm>*/}
+            {/*  </CardBody>*/}
+            {/*</Card>*/}
 
-            <Card>
-              <CardBody>
-                <AvForm
-                  className="form-horizontal"
-                  onValidSubmit={(e, v) => {
-                    this.handleValidSubmit(e, v)
-                  }}
-                >
-                  <div className="form-group">
-                    <AvField
-                      name="username"
-                      label="User Name"
-                      value={this.state.name}
-                      className="form-control"
-                      placeholder="Enter User Name"
-                      type="text"
-                      required
-                    />
-                    <AvField name="idx" value={this.state.idx} type="hidden" />
-                  </div>
-                  <div className="text-center mt-4">
-                    <Button type="submit" color="danger">
-                      Update User Name
-                    </Button>
-                  </div>
-                </AvForm>
-              </CardBody>
-            </Card>
+            <h4 className="card-title mb-4 mt-3">Архів</h4>
+            <EcommerceArchive/>
           </Container>
         </div>
       </React.Fragment>

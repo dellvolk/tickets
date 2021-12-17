@@ -1,6 +1,7 @@
 import axios from "axios"
 import { axiosApi, del, get, post, put } from "./api_helper";
 import * as url from "./url_helper"
+import { GET_ARCHIVE_DATA, GET_PRODUCT_FILTERS, GET_USER_DATA, POST_BUY_TICKETS } from "./url_helper";
 
 // Gets the logged in user data from local session
 const getLoggedInUser = () => {
@@ -102,6 +103,7 @@ export const postSocialLogin = data => post(url.SOCIAL_LOGIN, data)
 
 // get Products
 export const getProducts = () => get(url.GET_PRODUCTS)
+export const getProductFilters = () => get(url.GET_PRODUCT_FILTERS)
 
 // get Product detail
 export const getProductDetail = id =>
@@ -155,6 +157,12 @@ export const deleteOrder = order =>
 
 // get cart data
 export const getCartData = () => get(url.GET_CART_DATA)
+export const getArchiveData = () => get(url.GET_ARCHIVE_DATA)
+export const postCartData = (id) => post(url.GET_CART_DATA, {ticket: id})
+export const deleteProductFromCartById = (id) => del(url.GET_CART_DATA + '/' + id)
+export const getUserInfo = () => get(url.GET_USER_DATA)
+
+export const postBuyTickets = params => post(url.POST_BUY_TICKETS, params)
 
 // get customers
 export const getCustomers = () => get(url.GET_CUSTOMERS)

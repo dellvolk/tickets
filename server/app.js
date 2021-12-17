@@ -20,17 +20,45 @@ const getUID = req => {
 app.use(cors());
 app.use(express.json());
 
-app.get("/", function(req, res) {
-  let sql = "SELECT * FROM users";
-  connection.query(sql, function(err, results) {
-    // if (err) throw err;
-    console.log(results);
-    res.send(results);
+app.get("/cart", (req, res) => {
+  connection.query(query.CART(getUID(req)), function(error, results, fields) {
+    if (error) {
+      res.statusCode = 400;
+      res.send([]);
+      return void 0;
+    }
+    res.send(results.map(i => ({
+      ...i,
+      date: getDate(i.date),
+      data_attr: 1,
+      total: i.price
+    })));
   });
 });
 
-app.get("/cart", (req, res) => {
-  res.send(cartData);
+app.get("/user", (req, res) => {
+  connection.query(query.CART(getUID(req)), function(error, results, fields) {
+    if (error) {
+      res.statusCode = 400;
+      res.send({ cart_count: 0 });
+      return void 0;
+    }
+    res.send({ cart_count: results.length });
+  });
+});
+
+app.get("/archive", (req, res) => {
+  connection.query(query.ARCHIVE(getUID(req)), function(error, results, fields) {
+    if (error) {
+      res.statusCode = 400;
+      res.send(error);
+      return void 0;
+    }
+    res.send(results.map(i => ({
+      ...i,
+      date: getDate(i.date)
+    })));
+  });
 });
 
 app.get("/products", (req, res) => {
@@ -52,10 +80,10 @@ app.get("/filters", (req, res) => {
     connection.query(query.CITIES(), function(error2, cities) {
       if (error1 || error2) {
         res.statusCode = 400;
-        res.send({categories: [], cities: []});
+        res.send({ categories: [], cities: [] });
       } else {
         res.statusCode = 200;
-        res.send({categories, cities});
+        res.send({ categories, cities });
       }
     });
   });
@@ -63,26 +91,53 @@ app.get("/filters", (req, res) => {
 });
 
 app.post("/cart", (req, res) => {
-  connection.query(query.ADD_TO_CART(req.body), function(error, results, fields) {
+  const uid = getUID(req);
+  connection.query(query.IS_CART_BY_ID_AT_USER(req.body.ticket, uid), function(error, results) {
+    const count = results?.length || 0;
+    if (count === 0) {
+      connection.query(query.ADD_TO_CART(req.body.ticket, uid), function(error, results, fields) {
+        if (error) {
+          res.statusCode = 400;
+          res.send("Щось пішло не так. Спробуйте пізніше");
+          return void 0;
+        }
+        res.send("Квиток успішно доданий у корзину");
+      });
+    } else {
+      res.statusCode = 400;
+      res.send("Цей квиток уже наявний у корзині");
+    }
+  });
+});
+
+app.post("/password-change", (req, res) => {
+
+});
+
+app.delete("/cart/:id", (req, res) => {
+  connection.query(query.DELETE_FROM_CART(req.params.id), (error) => {
     if (error) {
-      console.log(error);
       res.statusCode = 400;
       res.send("Something went wrong");
-      return void 0;
+    } else {
+      res.send("");
     }
-    res.send(results);
   });
 });
 
 app.post("/buy", (req, res) => {
-  connection.query(query.ADD_TO_ARCHIVE(req.body), function(error, results, fields) {
+  connection.query(query.ADD_TO_ARCHIVE(getUID(req), req.body), function(error, results, fields) {
     if (error) {
       console.log(error);
       res.statusCode = 400;
       res.send("Something went wrong");
       return void 0;
     }
-    res.send(results);
+    if (req.body.cart_id) {
+      connection.query(query.DELETE_FROM_CART(req.body.cart_id), () => {
+      });
+    }
+    res.send({});
   });
 });
 
@@ -112,7 +167,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/product/:id", (req, res) => {
-    connection.query(query.TICKET_BY_ID(req.params.id), function(error, results, fields) {
+  connection.query(query.TICKET_BY_ID(req.params.id), function(error, results, fields) {
     if (error || results.length === 0) {
       res.statusCode = 404;
       res.send(error);

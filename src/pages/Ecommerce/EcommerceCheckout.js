@@ -700,7 +700,7 @@ class EcommerceCheckout extends Component {
                                           <td>
                                             <h5 className="font-size-14 text-truncate">
                                               <a
-                                                href="/ecommerce-product-details/1"
+                                                href="/event/1"
                                                 className="text-dark"
                                               >
                                                 {orderitem.productTitle}{" "}

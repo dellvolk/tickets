@@ -7,21 +7,18 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 // reactstrap
-import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from "reactstrap";
+import { DropdownToggle } from "reactstrap";
 
 // Import menuDropdown
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
-
-import megamenuImg from "../../assets/images/megamenu-img.png";
 import logo from "../../assets/images/logo.svg";
 import logoLight from "../../assets/images/logo-light.png";
 import logoLightSvg from "../../assets/images/logo-light.svg";
 import logoDark from "../../assets/images/logo-dark.png";
 
 // import images
-
 // Redux Store
-import { toggleRightSidebar } from "../../store/actions";
+import { getUserInfo, toggleRightSidebar } from "../../store/actions";
 
 //i18n
 import { withTranslation } from "react-i18next";
@@ -96,6 +93,13 @@ class Header extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log("render header");
+    if (this.props.user.cart_count === null) {
+      this.props.getUserInfo();
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -121,171 +125,17 @@ class Header extends Component {
                   </span>
                 </Link>
               </div>
+              <Link to={"/"}>
 
-              <button
-                type="button"
-                className="btn btn-sm px-3 font-size-16 d-lg-none header-item"
-                data-toggle="collapse"
-                onClick={this.toggleMenu}
-                data-target="#topnav-menu-content"
-              >
-                <i className="fa fa-fw fa-bars" />
-              </button>
-              <Dropdown
-                className="dropdown-mega d-none d-lg-block ms-2"
-                isOpen={this.state.megaMenuDrp}
-                toggle={() => {
-                  this.setState({ megaMenuDrp: !this.state.megaMenuDrp });
-                }}
-              >
-                <DropdownToggle
-                  className="btn header-item"
-                  caret
-                  tag="button"
+                <button
+                  type="button"
+                  className="btn px-3 font-size-16 header-item"
                 >
-                  {"Events"}{" "}
-                  <i className="mdi mdi-chevron-down" />
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-menu dropdown-megamenu">
-                  <Row>
-                    <Col sm={8}>
-                      <Row>
-                        <Col md={4}>
-                          <h5 className="font-size-14 mt-0">
-                            {this.props.t("UI Components")}
-                          </h5>
-                          <ul className="list-unstyled megamenu-list">
-                            <li>
-                              <Link to="#">{this.props.t("Lightbox")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Range Slider")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Sweet Alert")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Rating")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Forms")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Tables")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Charts")}</Link>
-                            </li>
-                          </ul>
-                        </Col>
+                  Всі події
+                </button>
+              </Link>
 
-                        <Col md={4}>
-                          <h5 className="font-size-14 mt-0">
-                            {this.props.t("Applications")}
-                          </h5>
-                          <ul className="list-unstyled megamenu-list">
-                            <li>
-                              <Link to="#">{this.props.t("Ecommerce")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Calendar")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Email")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Projects")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Tasks")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Contacts")}</Link>
-                            </li>
-                          </ul>
-                        </Col>
 
-                        <Col md={4}>
-                          <h5 className="font-size-14 mt-0">
-                            {this.props.t("Extra Pages")}
-                          </h5>
-                          <ul className="list-unstyled megamenu-list">
-                            <li>
-                              <Link to="#">
-                                {this.props.t("Light Sidebar")}
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#">
-                                {this.props.t("Compact Sidebar")}
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#">
-                                {this.props.t("Horizontal layout")}
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#"> {this.props.t("Maintenance")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Coming Soon")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Timeline")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("FAQs")}</Link>
-                            </li>
-                          </ul>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col sm={4}>
-                      <Row>
-                        <Col sm={6}>
-                          <h5 className="font-size-14 mt-0">
-                            {this.props.t("UI Components")}
-                          </h5>
-                          <ul className="list-unstyled megamenu-list">
-                            <li>
-                              <Link to="#">{this.props.t("Lightbox")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Range Slider")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Sweet Alert")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Rating")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Forms")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Tables")}</Link>
-                            </li>
-                            <li>
-                              <Link to="#">{this.props.t("Charts")}</Link>
-                            </li>
-                          </ul>
-                        </Col>
-
-                        <Col sm={5}>
-                          <div>
-                            <img
-                              src={megamenuImg}
-                              alt=""
-                              className="img-fluid mx-auto d-block"
-                            />
-                          </div>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                </DropdownMenu>
-              </Dropdown>
             </div>
 
             <div className="d-flex">
@@ -294,9 +144,10 @@ class Header extends Component {
                 tag="button"
                 id="page-header-notifications-dropdown"
               >
-                <Link to={'/ecommerce-cart'}>
+                <Link to={"/ecommerce-cart"}>
                   <i className="bx bx-cart" />
-                  <span className="badge bg-danger rounded-pill">0</span>
+                  {this.props.user.cart_count !== null &&
+                  <span className="badge bg-danger rounded-pill">{this.props.user.cart_count}</span>}
                 </Link>
               </DropdownToggle>
               <ProfileMenu />
@@ -311,14 +162,16 @@ class Header extends Component {
 Header.propTypes = {
   openLeftMenuCallBack: PropTypes.func,
   t: PropTypes.any,
-  toggleRightSidebar: PropTypes.func
+  toggleRightSidebar: PropTypes.func,
+  getUserInfo: PropTypes.func,
+  user: PropTypes.any
 };
 
 const mapStatetoProps = state => {
-  const { layoutType } = state.Layout;
-  return { layoutType };
+  const { layoutType, user } = state.Layout;
+  return { layoutType, user };
 };
 
-export default connect(mapStatetoProps, { toggleRightSidebar })(
+export default connect(mapStatetoProps, { toggleRightSidebar, getUserInfo })(
   withTranslation()(Header)
 );

@@ -8,12 +8,21 @@ import {
   TOGGLE_RIGHT_SIDEBAR,
   SHOW_RIGHT_SIDEBAR,
   CHANGE_PRELOADER,
-  HIDE_RIGHT_SIDEBAR,
-} from "./actionTypes"
+  HIDE_RIGHT_SIDEBAR, GET_USER_INFO, SET_USER_INFO
+} from "./actionTypes";
 
 export const changeLayout = layout => ({
   type: CHANGE_LAYOUT,
   payload: layout,
+})
+
+export const getUserInfo = () => ({
+  type: GET_USER_INFO
+})
+
+export const setUserInfo = payload => ({
+  type: SET_USER_INFO,
+  payload
 })
 
 export const changePreloader = layout => ({

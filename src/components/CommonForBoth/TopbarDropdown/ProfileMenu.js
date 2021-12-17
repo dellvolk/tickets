@@ -79,22 +79,9 @@ class ProfileMenu extends Component {
             <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-end">
-            <DropdownItem tag="a" href="/profile">
+            <DropdownItem tag={Link} to="/profile">
               <i className="bx bx-user font-size-16 align-middle ms-1" />
               {this.props.t("Profile")}
-            </DropdownItem>
-            <DropdownItem tag="a" href="/crypto-wallet">
-              <i className="bx bx-wallet font-size-16 align-middle me-1" />
-              {this.props.t("My Wallet")}
-            </DropdownItem>
-            <DropdownItem tag="a" href="#">
-              <span className="badge bg-success float-end">11</span>
-              <i className="bx bx-wrench font-size-17 align-middle me-1" />
-              {this.props.t("Settings")}
-            </DropdownItem>
-            <DropdownItem tag="a" href="auth-lock-screen">
-              <i className="bx bx-lock-open font-size-16 align-middle me-1" />
-              {this.props.t("Lock screen")}
             </DropdownItem>
             <div className="dropdown-divider" />
             <Link to="/logout" className="dropdown-item">

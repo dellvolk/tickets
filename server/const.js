@@ -1,5 +1,14 @@
 const cartData = [
   {
+    id: 192,
+    img: "https://storage.concert.ua/JmJ/2/mQ/61a8778ebe867/e8ae.jpg:31-catalog-event_item-desktop",
+    name: "БИ-2",
+    price: 500,
+    date: new Date().toDateString(),
+    city: "Київ",
+    address: "Stereo plaza"
+  },
+  {
     id: 1,
     img: "img1",
     name: "Half sleeve T-shirt",

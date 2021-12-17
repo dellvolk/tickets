@@ -30,7 +30,7 @@ import { productImages } from "../../../assets/images/product/";
 import Breadcrumbs from "components/Common/Breadcrumb";
 
 //Import actions
-import { getProductDetail } from "../../../store/e-commerce/actions";
+import { addProductToCart, getProductDetail } from "../../../store/e-commerce/actions";
 import Reviews from "./Reviews";
 
 class EcommerceProductDetail extends Component {
@@ -65,6 +65,10 @@ class EcommerceProductDetail extends Component {
   imageShow(img, id) {
     const expandImg = document.getElementById("expandedImg" + id)
     expandImg.src = img
+  }
+
+  onClickBuy = product => {
+    this.props.addProductToCart(product.id, this.props.history)
   }
 
   render() {
@@ -103,7 +107,12 @@ class EcommerceProductDetail extends Component {
                                     {product.category}
                                   </Link>
                                   <h4 className="mt-1 mb-3">{product.name || product.title}</h4>
-
+                                  <h5 className="mb-3 text-truncate">
+                                    {product.city}, {product.address}
+                                  </h5>
+                                  <h6 className="mb-5 text-truncate">
+                                    {product.date}
+                                  </h6>
                                   <h5 className="mb-4">
                                     Ціна :{" "}
                                     <b>{product.price} грн</b>
@@ -115,6 +124,7 @@ class EcommerceProductDetail extends Component {
                                     type="button"
                                     color="primary"
                                     className="btn mt-2 me-1"
+                                    onClick={() => this.props.addProductToCart(product.id)}
                                   >
                                     <i className="bx bx-cart me-2" /> В корзину
                                   </Button>
@@ -122,6 +132,7 @@ class EcommerceProductDetail extends Component {
                                     type="button"
                                     color="success"
                                     className="ml-1 btn  mt-2"
+                                    onClick={() => this.onClickBuy(product)}
                                   >
                                     <i className="bx bx-shopping-bag me-2" />
                                     Купити
@@ -151,6 +162,8 @@ EcommerceProductDetail.propTypes = {
   product: PropTypes.object,
   match: PropTypes.object,
   onGetProductDetail: PropTypes.func,
+  addProductToCart: PropTypes.func,
+  history: PropTypes.any,
 }
 
 const mapStateToProps = ({ ecommerce }) => ({
@@ -159,6 +172,7 @@ const mapStateToProps = ({ ecommerce }) => ({
 
 const mapDispatchToProps = dispatch => ({
   onGetProductDetail: id => dispatch(getProductDetail(id)),
+  addProductToCart: (id, history) => dispatch(addProductToCart(id, history)),
 })
 
 export default connect(

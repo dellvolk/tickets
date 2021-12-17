@@ -9,11 +9,12 @@ export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd"
 export const SOCIAL_LOGIN = "/social-login"
 
 //PROFILE
-export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile"
+export const POST_EDIT_JWT_PROFILE = "/password-change"
 export const POST_EDIT_PROFILE = "/post-fake-profile"
 
 //PRODUCTS
 export const GET_PRODUCTS = "/products"
+export const GET_PRODUCT_FILTERS = "/filters"
 export const GET_PRODUCTS_DETAIL = "/product"
 export const ADD_NEW_PROJECT = "/add/product"
 export const UPDATE_PROJECT = "/update/product"
@@ -39,8 +40,11 @@ export const ADD_NEW_ORDER = "/add/order"
 export const UPDATE_ORDER = "/update/order"
 export const DELETE_ORDER = "/delete/order"
 
+export const POST_BUY_TICKETS = "/buy"
 //CART DATA
 export const GET_CART_DATA = "/cart"
+export const GET_ARCHIVE_DATA = "/archive"
+export const GET_USER_DATA = "/user"
 
 //CUSTOMERS
 export const GET_CUSTOMERS = "/customers"

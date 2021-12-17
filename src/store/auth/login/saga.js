@@ -12,6 +12,7 @@ import {
   postSocialLogin,
 } from "../../../helpers/fakebackend_helper"
 import { axiosApi } from "../../../helpers/api_helper";
+import { setUserInfo } from "../../layout/actions";
 
 const fireBaseBackend = getFirebaseBackend()
 
@@ -34,11 +35,7 @@ function* logoutUser({ payload: { history } }) {
   try {
     localStorage.removeItem("authUser")
     axiosApi.defaults.headers.common["Authorization"] = ""
-
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      const response = yield call(fireBaseBackend.logout)
-      yield put(logoutUserSuccess(response))
-    }
+    yield put(setUserInfo({cart_count: null }))
     history.push("/login")
   } catch (error) {
     yield put(apiError(error))

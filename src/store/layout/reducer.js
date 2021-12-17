@@ -2,24 +2,25 @@
 import {
   CHANGE_LAYOUT,
   CHANGE_LAYOUT_WIDTH,
+  CHANGE_PRELOADER,
   CHANGE_SIDEBAR_THEME,
   CHANGE_SIDEBAR_THEME_IMAGE,
   CHANGE_SIDEBAR_TYPE,
   CHANGE_TOPBAR_THEME,
-  TOGGLE_RIGHT_SIDEBAR,
-  SHOW_RIGHT_SIDEBAR,
-  CHANGE_PRELOADER,
   HIDE_RIGHT_SIDEBAR,
-} from "./actionTypes"
+  SET_USER_INFO,
+  SHOW_RIGHT_SIDEBAR,
+  TOGGLE_RIGHT_SIDEBAR
+} from "./actionTypes";
 
 //constants
 import {
   layoutTypes,
   layoutWidthTypes,
-  topBarThemeTypes,
   leftBarThemeImageTypes,
-  leftSidebarTypes,
   leftSideBarThemeTypes,
+  leftSidebarTypes,
+  topBarThemeTypes
 } from "../../constants/layout";
 
 const INIT_STATE = {
@@ -34,64 +35,73 @@ const INIT_STATE = {
   isMobile: false,
   showSidebar: true,
   leftMenu: false,
-}
+  user: { cart_count: null }
+};
 
 const Layout = (state = INIT_STATE, action) => {
   switch (action.type) {
+    case SET_USER_INFO:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload
+        }
+      };
     case CHANGE_LAYOUT:
       return {
         ...state,
-        layoutType: action.payload,
-      }
+        layoutType: action.payload
+      };
     case CHANGE_PRELOADER:
       return {
         ...state,
-        isPreloader: action.payload,
-      }
+        isPreloader: action.payload
+      };
 
     case CHANGE_LAYOUT_WIDTH:
       return {
         ...state,
-        layoutWidth: action.payload,
-      }
+        layoutWidth: action.payload
+      };
     case CHANGE_SIDEBAR_THEME:
       return {
         ...state,
-        leftSideBarTheme: action.payload,
-      }
+        leftSideBarTheme: action.payload
+      };
     case CHANGE_SIDEBAR_THEME_IMAGE:
       return {
         ...state,
-        leftSideBarThemeImage: action.payload,
-      }
+        leftSideBarThemeImage: action.payload
+      };
     case CHANGE_SIDEBAR_TYPE:
       return {
         ...state,
-        leftSideBarType: action.payload.sidebarType,
-      }
+        leftSideBarType: action.payload.sidebarType
+      };
     case CHANGE_TOPBAR_THEME:
       return {
         ...state,
-        topbarTheme: action.payload,
-      }
+        topbarTheme: action.payload
+      };
     case TOGGLE_RIGHT_SIDEBAR:
       return {
         ...state,
-        showRightSidebar: !state.showRightSidebar,
-      }
+        showRightSidebar: !state.showRightSidebar
+      };
     case SHOW_RIGHT_SIDEBAR:
       return {
         ...state,
-        showRightSidebar: true,
-      }
+        showRightSidebar: true
+      };
     case HIDE_RIGHT_SIDEBAR:
       return {
         ...state,
-        showRightSidebar: false,
-      }
+        showRightSidebar: false
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default Layout
+export default Layout;

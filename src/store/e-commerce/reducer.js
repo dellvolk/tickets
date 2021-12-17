@@ -22,21 +22,28 @@ import {
   UPDATE_CUSTOMER_SUCCESS,
   UPDATE_CUSTOMER_FAIL,
   DELETE_CUSTOMER_SUCCESS,
-  DELETE_CUSTOMER_FAIL,
-} from "./actionTypes"
+  DELETE_CUSTOMER_FAIL, GET_ARCHIVE_DATA_SUCCESS, SET_PRODUCT_FILTERS
+} from "./actionTypes";
 
 const INIT_STATE = {
   products: [],
   product: {},
   orders: [],
   cartData: {},
+  archiveData: {},
   customers: [],
+  filters: {},
   shops: [],
   error: {},
 }
 
 const Ecommerce = (state = INIT_STATE, action) => {
   switch (action.type) {
+    case SET_PRODUCT_FILTERS:
+      return {
+        ...state,
+        filters: action.payload
+      }
     case GET_PRODUCTS_SUCCESS:
       return {
         ...state,
@@ -113,6 +120,12 @@ const Ecommerce = (state = INIT_STATE, action) => {
       return {
         ...state,
         error: action.payload,
+      }
+
+    case GET_ARCHIVE_DATA_SUCCESS:
+      return {
+        ...state,
+        archiveData: action.payload,
       }
 
     case GET_CART_DATA_SUCCESS:

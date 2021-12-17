@@ -23,20 +23,24 @@ import EcommerceShops from "../pages/Ecommerce/EcommerceShops/index"
 import EcommerceAddProduct from "../pages/Ecommerce/EcommerceAddProduct"
 
 const authProtectedRoutes = [
-  { path: "/dashboard", component: EcommerceProducts },
+  { path: "/events", component: EcommerceProducts },
+  { path: "/cart", component: EcommerceCart },
+  { path: "/event/:id", component: EcommerceProductDetail },
+  { path: "/dashboard", component:() => <Redirect to={'/events'}/> },
 
 
   //Ecommerce
   // { path: "/ecommerce-products/:id", component: EcommerceProducts },
-  { path: "/ecommerce-products", component: EcommerceProducts },
+  { path: "/ecommerce-products", component: () => <Redirect to={'/events'}/> },
   { path: "/ecommerce-product-details/:id", component: EcommerceProductDetail },
 
   { path: "/ecommerce-orders", component: EcommerceOrders },
   { path: "/ecommerce-customers", component: EcommerceCustomers },
-  { path: "/ecommerce-cart", component: EcommerceCart },
+  { path: "/ecommerce-cart", component: () => <Redirect to={'/cart'}/> },
   { path: "/ecommerce-checkout", component: EcommerceCheckout },
   { path: "/ecommerce-shops", component: EcommerceShops },
   { path: "/ecommerce-add-product", component: EcommerceAddProduct },
+
 
   //profile
   { path: "/profile", component: UserProfile },

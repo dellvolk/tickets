@@ -1,4 +1,4 @@
-import { call, takeEvery, put } from "redux-saga/effects"
+import { call, put, takeEvery } from "redux-saga/effects";
 
 import {
   CHANGE_LAYOUT,
@@ -7,15 +7,18 @@ import {
   CHANGE_SIDEBAR_THEME_IMAGE,
   CHANGE_SIDEBAR_TYPE,
   CHANGE_TOPBAR_THEME,
-  TOGGLE_RIGHT_SIDEBAR,
-  SHOW_RIGHT_SIDEBAR,
+  GET_USER_INFO,
   HIDE_RIGHT_SIDEBAR,
-} from "./actionTypes"
+  SHOW_RIGHT_SIDEBAR,
+  TOGGLE_RIGHT_SIDEBAR
+} from "./actionTypes";
 
 import {
   changeSidebarType as changeSidebarTypeAction,
   changeTopbarTheme as changeTopbarThemeAction,
-} from "./actions"
+  setUserInfo
+} from "./actions";
+import { getUserInfo } from "../../helpers/fakebackend_helper";
 
 /**
  * Changes the body attribute
@@ -182,6 +185,14 @@ function* hideRightSidebar() {
   } catch (error) { }
 }
 
+function* fetchGetUserInfo() {
+  try {
+    // yield call(manageBodyClass, "right-bar-enabled", "remove")
+    const response = yield call(getUserInfo)
+    yield put(setUserInfo(response))
+  } catch (error) { }
+}
+
 function* LayoutSaga() {
   yield takeEvery(CHANGE_LAYOUT, changeLayout)
   yield takeEvery(CHANGE_LAYOUT_WIDTH, changeLayoutWidth)
@@ -192,6 +203,7 @@ function* LayoutSaga() {
   yield takeEvery(TOGGLE_RIGHT_SIDEBAR, toggleRightSidebar)
   yield takeEvery(SHOW_RIGHT_SIDEBAR, showRightSidebar)
   yield takeEvery(HIDE_RIGHT_SIDEBAR, hideRightSidebar)
+  yield takeEvery(GET_USER_INFO, fetchGetUserInfo)
 }
 
 export default LayoutSaga
